@@ -1,6 +1,6 @@
 import React from "react";
 
-const Main = () =>{
+const MainContent = () =>{
     return(
         <main>
             <p>I love to visit New York, Paris, and Tokyo.</p>
@@ -8,4 +8,4 @@ const Main = () =>{
     );
 };
 
-export default Main;
+export default MainContent;
