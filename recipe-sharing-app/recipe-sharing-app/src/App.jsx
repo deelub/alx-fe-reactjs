@@ -2,9 +2,6 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import React from 'react';
-import AddRecipeForm from './components/AddRecipeForm';
-import RecipeList from './components/RecipeList';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -33,17 +30,6 @@ function App() {
       </p>
     </>
   )
-}
-
-
-function App() {
-  return (
-    <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-      <h1 style={{ textAlign: 'center' }}>🍽️ Recipe Sharing App</h1>
-      <AddRecipeForm />
-      <RecipeList />
-    </div>
-  );
 }
 
 export default App
