@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const BASE_URL = 'https://api.github.com/search/users';
+const API_ENDPOINT = 'https://api.github.com/search/users?q=';
 
 /**
  * Builds the GitHub search query string
@@ -9,6 +10,15 @@ const BASE_URL = 'https://api.github.com/search/users';
  * @param {string|number} minRepos - Minimum number of public repos
  * @returns {string} - GitHub query string
  */
+/** 
+ Fetch GitHub users based on advanced search criteria
+ * @param {string} username - GitHub username to search for
+ * @param {string} location - Location filter
+ * @param {string|number} minRepos - Minimum number of repositories
+ * @param {number} page - Page number for pagination
+ * @returns {Promise<object>} - API response data
+ */
+
 const buildQuery = (username, location, minRepos) => {
   let queryParts = [];
 
