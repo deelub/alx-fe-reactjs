@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { fetchUserData } from '../services/github';
 
-const SearchUser = () => {
+const Search = () => {
   const [username, setUsername] = useState('');
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -17,7 +17,7 @@ const SearchUser = () => {
       const data = await fetchUserData(username);
       setUserData(data);
     } catch (err) {
-      setError('Looks like we can’t find the user');
+      setError("Looks like we cant find the user");
     } finally {
       setLoading(false);
     }
@@ -52,4 +52,4 @@ const SearchUser = () => {
   );
 };
 
-export default SearchUser;
+export default Search;
