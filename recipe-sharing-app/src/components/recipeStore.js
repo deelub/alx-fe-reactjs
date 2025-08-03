@@ -1,25 +1,54 @@
-
 import { create } from 'zustand';
 
-export const useRecipeStore = create((set) => ({
+export const useRecipeStore = create((set, get) => ({
   recipes: [],
-  searchTerm: '',                  // <-- Add searchTerm state
-  setSearchTerm: (term) => set({ searchTerm: term }), // <-- Action to update searchTerm
+  searchTerm: '',
+  filteredRecipes: [],
 
-  addRecipe: (newRecipe) =>
-    set((state) => ({ recipes: [...state.recipes, newRecipe] })),
+  setSearchTerm: (term) => {
+    set({ searchTerm: term });
+    get().filterRecipes(); // trigger filtering when term changes
+  },
 
-  updateRecipe: (updatedRecipe) =>
+  filterRecipes: () =>
     set((state) => ({
-      recipes: state.recipes.map((recipe) =>
-        recipe.id === updatedRecipe.id ? updatedRecipe : recipe
+      filteredRecipes: state.recipes.filter((recipe) =>
+        recipe.title.toLowerCase().includes(state.searchTerm.toLowerCase())
       ),
     })),
 
-  deleteRecipe: (id) =>
-    set((state) => ({
-      recipes: state.recipes.filter((recipe) => recipe.id !== id),
-    })),
+  addRecipe: (newRecipe) =>
+    set((state) => {
+      const updatedRecipes = [...state.recipes, newRecipe];
+      return {
+        recipes: updatedRecipes,
+        filteredRecipes: updatedRecipes.filter((recipe) =>
+          recipe.title.toLowerCase().includes(state.searchTerm.toLowerCase())
+        ),
+      };
+    }),
 
-  setRecipes: (recipes) => set({ recipes }),
+  updateRecipe: (updatedRecipe) =>
+    set((state) => {
+      const updatedRecipes = state.recipes.map((recipe) =>
+        recipe.id === updatedRecipe.id ? updatedRecipe : recipe
+      );
+      return {
+        recipes: updatedRecipes,
+        filteredRecipes: updatedRecipes.filter((recipe) =>
+          recipe.title.toLowerCase().includes(state.searchTerm.toLowerCase())
+        ),
+      };
+    }),
+
+  deleteRecipe: (id) =>
+    set((state) => {
+      const updatedRecipes = state.recipes.filter((r) => r.id !== id);
+      return {
+        recipes: updatedRecipes,
+        filteredRecipes: updatedRecipes.filter((recipe) =>
+          recipe.title.toLowerCase().includes(state.searchTerm.toLowerCase())
+        ),
+      };
+    }),
 }));
