@@ -27,7 +27,8 @@ const App = () => {
   );
 };
 
-export default App;
+import { BrowserRouter as Router } from 'react-router-dom';
+
 
 
 
